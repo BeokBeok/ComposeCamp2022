@@ -38,7 +38,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -179,7 +181,7 @@ fun FavoriteCollectionsGrid(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
+        modifier = modifier.height(120.dp)
     ) {
         items(favoriteCollectionsData) { item ->
             FavoriteCollectionCard(
@@ -203,7 +205,8 @@ fun HomeSection(
         Text(
             text = stringResource(id = title).uppercase(Locale.getDefault()),
             style = MaterialTheme.typography.h2,
-            modifier = Modifier.paddingFromBaseline(top = 48.dp, bottom = 8.dp)
+            modifier = Modifier
+                .paddingFromBaseline(top = 48.dp, bottom = 8.dp)
                 .padding(horizontal = 16.dp)
         )
         content()
@@ -214,6 +217,19 @@ fun HomeSection(
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     // Implement composable here
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(vertical = 16.dp)
+    ) {
+        SearchBar(Modifier.padding(horizontal = 16.dp))
+        HomeSection(title = R.string.align_your_body) {
+            AlignYourBodyRow()
+        }
+        HomeSection(title = R.string.favorite_collections) {
+            FavoriteCollectionsGrid()
+        }
+    }
 }
 
 // Step: Bottom navigation - Material
@@ -303,7 +319,7 @@ fun HomeSectionPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2, heightDp = 180)
 @Composable
 fun ScreenContentPreview() {
     MySootheTheme { HomeScreen() }
