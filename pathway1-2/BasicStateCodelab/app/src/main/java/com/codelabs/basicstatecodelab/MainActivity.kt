@@ -33,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     BasicStateCodelabTheme {
-        WellnessScreen()
+        StatefulCounter()
     }
 }
