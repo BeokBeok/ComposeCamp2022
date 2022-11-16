@@ -108,10 +108,10 @@ class PlantDetailFragment : Fragment() {
                     else -> false
                 }
             }
-        }
-        ComposeView(requireContext()).setContent {
-            MaterialTheme {
-                PlantDetailDescription(plantDetailViewModel = plantDetailViewModel)
+            composeView.setContent {
+                MaterialTheme {
+                    PlantDetailDescription()
+                }
             }
         }
         setHasOptionsMenu(true)
